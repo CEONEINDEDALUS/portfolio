@@ -94,7 +94,7 @@ function initLoaderHome() {
       });
     }
 
-    var fallback = setTimeout(crossfadeToEmblem, 10500);
+    var fallback = setTimeout(crossfadeToEmblem, 15500);
 
     if (video) {
       video.addEventListener("ended", function onEnded() {
