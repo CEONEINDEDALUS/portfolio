@@ -37,14 +37,17 @@ function initLoaderHome() {
 		display: "none",
 	});
 
-  tl.set(".loading-words .home-active, .loading-words .home-active-last", { 
-		display: "block",
-    opacity: 0
-	});
+  tl.set(".loading-intro-media", {
+    opacity: 1
+  });
 
-  tl.set(".loading-words .home-active-first", { 
-		opacity: 1,
-	});
+  tl.set(".loading-intro-video", {
+    opacity: 1
+  });
+
+  tl.set(".loading-intro-emblem", {
+    opacity: 0
+  });
 
   if ($(window).width() > 540) { 
     tl.set(".loading-screen .rounded-div-wrap.bottom", { 
@@ -64,81 +67,103 @@ function initLoaderHome() {
     scroll.stop();
   });
 
-  tl.to(".loading-words", {
-		duration: .8,
-		opacity: 1,
-    y: -50,
-    ease: "Power4.easeOut",
-    delay: .5
-	});
+  tl.call(playIntroSequence);
 
-  tl.to(".loading-words .home-active", {
-		duration: .01,
-		opacity: 1,
-    stagger: .15,
-    ease: "none",
-    onStart: homeActive
-  },"=-.4");
+  function playIntroSequence() {
 
-  function homeActive() {
-    gsap.to(".loading-words .home-active", {
-      duration: .01,
+    var video = document.querySelector(".loading-intro-video");
+    var emblem = document.querySelector(".loading-intro-emblem");
+    var crossfaded = false;
+
+    function crossfadeToEmblem() {
+      if (crossfaded) return;
+      crossfaded = true;
+
+      gsap.to(".loading-intro-video", {
+        duration: .6,
+        opacity: 0,
+        ease: "Power2.easeInOut"
+      });
+
+      gsap.to(".loading-intro-emblem", {
+        duration: .8,
+        opacity: 1,
+        delay: .1,
+        ease: "Power2.easeInOut",
+        onComplete: revealSite
+      });
+    }
+
+    var fallback = setTimeout(crossfadeToEmblem, 7000);
+
+    if (video) {
+      video.addEventListener("ended", function onEnded() {
+        clearTimeout(fallback);
+        video.removeEventListener("ended", onEnded);
+        crossfadeToEmblem();
+      });
+
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          clearTimeout(fallback);
+          crossfadeToEmblem();
+        });
+      }
+    } else {
+      clearTimeout(fallback);
+      crossfadeToEmblem();
+    }
+  }
+
+  function revealSite() {
+
+    var tl2 = gsap.timeline();
+
+    tl2.to(".loading-intro-media", {
+      duration: .5,
       opacity: 0,
-      stagger: .15,
-      ease: "none",
-      delay: .15
+      delay: .6,
+      ease: "Power2.easeInOut"
+    });
+
+    tl2.to(".loading-screen", {
+      duration: .8,
+      top: "-100%",
+      ease: "Power4.easeInOut"
+    },"-=.2");
+
+    tl2.to(".loading-screen .rounded-div-wrap.bottom", {
+      duration: 1,
+      height: "0vh",
+      ease: "Power4.easeInOut"
+    },"-=.8");
+
+    tl2.set(".loading-screen", {
+      top: "calc(-100%)"
+    });
+
+    tl2.set(".loading-screen .rounded-div-wrap.bottom", {
+      height: "0vh"
+    });
+
+    tl2.to("main .once-in", {
+      duration: 1.5,
+      y: "0vh",
+      stagger: .07,
+      ease: "Expo.easeOut",
+      clearProps: true
+    },"-=.8");
+
+    tl2.set("html", {
+      cursor: "auto"
+    },"-=1.2");
+
+    tl2.call(function() {
+      scroll.start();
     });
   }
 
-  tl.to(".loading-words .home-active-last", {
-		duration: .01,
-		opacity: 1,
-    delay: .15
-  });
-  
-	tl.to(".loading-screen", {
-		duration: .8,
-		top: "-100%",
-		ease: "Power4.easeInOut",
-    delay: .2
-  });
-
-  tl.to(".loading-screen .rounded-div-wrap.bottom", {
-		duration: 1,
-		height: "0vh",
-		ease: "Power4.easeInOut"
-	},"=-.8");
-
-  tl.to(".loading-words", {
-		duration: .3,
-		opacity: 0,
-    ease: "linear"
-	},"=-.8");
-
-	tl.set(".loading-screen", { 
-		top: "calc(-100%)" 
-	});	
-
-  tl.set(".loading-screen .rounded-div-wrap.bottom", { 
-		height: "0vh"
-	});	
-
-  tl.to("main .once-in", {
-		duration: 1.5,
-    y: "0vh",
-    stagger: .07,
-		ease: "Expo.easeOut",
-    clearProps: true
-	},"=-.8");
-
-  tl.set("html", { 
-		cursor: "auto"
-	},"=-1.2");
-
-  tl.call(function() {
-    scroll.start();
-  });
-  
 }
 
 // Animation - First Page Load

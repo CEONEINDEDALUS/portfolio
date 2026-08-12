@@ -158,10 +158,33 @@ main.touch .main-wrap {
    display: block;
 }
 
-.loading-container .loading-words .home-active,
-.loading-container .loading-words .home-active-last {
+.loading-container .loading-intro-media {
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   height: 100%;
+   z-index: 1;
+   overflow: hidden;
+   background: var(--color-dark-dark);
+}
+
+.loading-container .loading-intro-video,
+.loading-container .loading-intro-emblem {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+.loading-container .loading-intro-emblem {
    opacity: 0;
-   display: none;
+   object-fit: contain;
+   width: min(60vw, 60vh);
+   height: min(60vw, 60vh);
+   will-change: opacity;
 }
 
 .loading-fade {
@@ -753,6 +776,49 @@ main.touch .main-wrap {
    position: absolute;
    left: 50%;
    transform: translateX(-50%);
+}
+
+.home-header .personal-image .scp-emblem-backdrop {
+   position: absolute;
+   inset: 0;
+   z-index: 0;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   pointer-events: none;
+}
+
+.home-header .personal-image .scp-emblem-backdrop img {
+   position: static;
+   left: auto;
+   transform: none;
+   width: auto;
+   height: 55%;
+   max-width: 55%;
+   object-fit: contain;
+   opacity: .28;
+   filter: grayscale(1) contrast(1.05);
+}
+
+.home-header .personal-image > img:last-child {
+   position: relative;
+   z-index: 1;
+}
+
+.home-header .row .flex-col .motto {
+   display: flex;
+   gap: .6em;
+   margin: .5em 0 0;
+   text-transform: uppercase;
+   letter-spacing: .08em;
+   font-size: clamp(.7em, .8vw, .8em);
+   color: var(--color-white);
+   opacity: .6;
+}
+
+.home-header .row .flex-col .motto span:not(:last-child)::after {
+   content: "\2022";
+   margin-left: .6em;
 }
 
 .home-header .big-name {
