@@ -1,0 +1,6 @@
+RESEND_API_KEY=re_your_resend_api_key
+CONTACT_TO=you@example.com
+# Use your verified domain sender in production, for example:
+# CONTACT_FROM=Ceonein Portfolio <contact@ceonein.dev>
+# Until the domain is verified, Resend's test sender works for the account owner:
+CONTACT_FROM=Ceonein Portfolio <onboarding@resend.dev>

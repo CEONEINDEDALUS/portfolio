@@ -1,2 +1,4 @@
-user-agent: *
-allow: /
+User-agent: *
+Allow: /
+
+Sitemap: https://ceonein.com/sitemap.xml

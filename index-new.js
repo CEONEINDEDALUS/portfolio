@@ -570,16 +570,16 @@ function initScript() {
 * Window Inner Height Check
 */
 function initWindowInnerheight() {
-    
+
   // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
-  $(document).ready(function(){
+  function setViewportHeight() {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
-    $('.btn-hamburger').click(function(){
-      let vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    });
-  });
+  }
+
+  setViewportHeight();
+  $(window).off('resize.ceoneinVh').on('resize.ceoneinVh', setViewportHeight);
+  $(document).off('click.ceoneinVh').on('click.ceoneinVh', '.btn-hamburger', setViewportHeight);
 
 }
 
@@ -615,34 +615,43 @@ function initCheckTouchDevice() {
 * Hamburger Nav Open/Close
 */
 function initHamburgerNav() {
-    
+
   // Open/close navigation when clicked .btn-hamburger
 
-  $(document).ready(function(){
-    $(".btn-hamburger, .btn-menu").click(function(){
-      if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
-          $(".btn-hamburger, .btn-menu").removeClass('active');
-          $("main").removeClass('nav-active');
-          scroll.start();
-      } else {
-          $(".btn-hamburger, .btn-menu").addClass('active');
-          $("main").addClass('nav-active');
-          scroll.stop();
-      }
-    });
-    $('.fixed-nav-back').click(function(){
+  $(document).off('click.ceoneinNav').on('click.ceoneinNav', '.btn-hamburger, .btn-menu', function () {
+    if ($(".btn-hamburger, .btn-menu").hasClass('active')) {
       $(".btn-hamburger, .btn-menu").removeClass('active');
       $("main").removeClass('nav-active');
+      $(".btn-hamburger, .btn-menu").attr('aria-expanded', 'false');
       scroll.start();
-    });
+    } else {
+      $(".btn-hamburger, .btn-menu").addClass('active');
+      $("main").addClass('nav-active');
+      $(".btn-hamburger, .btn-menu").attr('aria-expanded', 'true');
+      scroll.stop();
+    }
   });
-  $(document).keydown(function(e){
-    if(e.keyCode == 27) {
-      if ($('main').hasClass('nav-active')) {
-          $(".btn-hamburger, .btn-menu").removeClass('active');
-          $("main").removeClass('nav-active');
-          scroll.start();
-      } 
+
+  $(document).off('click.ceoneinNavBack').on('click.ceoneinNavBack', '.fixed-nav-back', function () {
+    $(".btn-hamburger, .btn-menu").removeClass('active');
+    $("main").removeClass('nav-active');
+    $(".btn-hamburger, .btn-menu").attr('aria-expanded', 'false');
+    scroll.start();
+  });
+
+  $(document).off('keydown.ceoneinNav').on('keydown.ceoneinNav', function (e) {
+    if (e.keyCode == 27 && $('main').hasClass('nav-active')) {
+      $(".btn-hamburger, .btn-menu").removeClass('active');
+      $("main").removeClass('nav-active');
+      $(".btn-hamburger, .btn-menu").attr('aria-expanded', 'false');
+      scroll.start();
+    }
+  });
+
+  $(document).off('keydown.ceoneinNavActivate').on('keydown.ceoneinNavActivate', '.btn-hamburger, .btn-menu', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      $(this).trigger('click');
     }
   });
 
@@ -760,8 +769,12 @@ function initStickyCursorWithDelay() {
   var mouseX = 0
   var mouseY = 0
 
+  if (window.__ceoneinCursorTween) {
+    window.__ceoneinCursorTween.kill();
+  }
+
   if(document.querySelector(".mouse-pos-list-image, .mouse-pos-list-btn, .mouse-post-list-span")) {
-  gsap.to({}, 0.0083333333, {
+  window.__ceoneinCursorTween = gsap.to({}, 0.0083333333, {
     repeat: -1,
     onRepeat: function() {
 
@@ -799,7 +812,7 @@ function initStickyCursorWithDelay() {
   });
   }
 
-  $(document).on("mousemove", function(e) {
+  $(document).off("mousemove.ceoneinCursor").on("mousemove.ceoneinCursor", function(e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
   });
@@ -1023,11 +1036,21 @@ function initScrollLetters() {
   // Fixed example with resizing
   // https://codepen.io/GreenSock/pen/QWqoKBv?editors=0010
 
+  if (window.__ceoneinScrollLetters) {
+    window.__ceoneinScrollLetters.forEach((entry) => {
+      entry.timeline.kill();
+      if (entry.resizeHandler) window.removeEventListener('resize', entry.resizeHandler);
+    });
+    window.__ceoneinScrollLetters = null;
+  }
+
   let direction = 1; // 1 = forward, -1 = backward scroll
+  const animations = [];
+  window.__ceoneinScrollLetters = animations;
 
   const roll1 = roll(".big-name .name-wrap", {duration: 18}),
         roll2 = roll(".rollingText02", {duration: 10}, true),
-        scroll = ScrollTrigger.create({
+        scrollTrigger = ScrollTrigger.create({
           trigger: document.querySelector('[data-scroll-container]'),
           onUpdate(self) {
             if (self.direction !== direction) {
@@ -1036,6 +1059,10 @@ function initScrollLetters() {
             }
           }
         });
+
+  [roll1, roll2].forEach((timeline) => {
+    animations.push({ timeline, resizeHandler: timeline.__resizeHandler });
+  });
 
   // helper function that clones the targets, places them next to the original, then animates the xPercent in a loop to make it appear to roll across the screen in a seamless loop.
   function roll(targets, vars, reverse) {
@@ -1056,12 +1083,15 @@ function initScrollLetters() {
           positionClones = () => elements.forEach((el, i) => gsap.set(clones[i], {position: "absolute", overwrite: false, top: el.offsetTop, left: el.offsetLeft + (reverse ? -el.offsetWidth : el.offsetWidth)}));
     positionClones();
     elements.forEach((el, i) => tl.to([el, clones[i]], {xPercent: reverse ? 100 : -100, ...vars}, 0));
-    window.addEventListener("resize", () => {
+
+    const resizeHandler = () => {
       let time = tl.totalTime(); // record the current time
       tl.totalTime(0); // rewind and clear out the timeline
       positionClones(); // reposition
       tl.totalTime(time); // jump back to the proper time
-    });
+    };
+    window.addEventListener("resize", resizeHandler);
+    tl.__resizeHandler = resizeHandler;
     return tl;
   }
 
@@ -1174,17 +1204,101 @@ function initAnchorScroll() {
 * Contact Form
 */
 function initContactForm() {
-    
-  $('.field').on('input', function() {
-    $(this).parent().toggleClass('not-empty', this.value.trim().length > 0);
-  });
 
-  $(function () {
-      $('.field').focusout(function () {
-          var text_val = $(this).val();
-          $(this).parent().toggleClass('not-empty', text_val !== "");
-      }).focusout();
-  });
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+
+  form.dataset.startedAt = String(Date.now());
+  delete form.dataset.sending;
+  form.removeAttribute('aria-busy');
+
+  $(document)
+    .off('submit.contactForm')
+    .on('submit.contactForm', '#contactForm', handleContactSubmit);
+
+}
+
+async function handleContactSubmit(event) {
+
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  if (form.dataset.sending === 'true') return;
+
+  const status = document.getElementById('contactStatus');
+  const button = form.querySelector('.send-message-btn');
+  const buttonLabel = button ? button.querySelector('span') : null;
+
+  function setStatus(message, type) {
+    if (!status) return;
+    status.textContent = message;
+    status.className = 'form-status' + (type ? ` is-${type}` : '');
+  }
+
+  if (!form.checkValidity()) {
+    const invalid = form.querySelector(':invalid');
+    if (invalid) invalid.focus();
+    setStatus('Please fill in your name and a valid email address.', 'error');
+    return;
+  }
+
+  const data = {
+    name: form.elements.name ? form.elements.name.value.trim() : '',
+    company: form.elements.company ? form.elements.company.value.trim() : '',
+    topic: form.elements.topic ? form.elements.topic.value : '',
+    email: form.elements.email ? form.elements.email.value.trim() : '',
+    budget: form.elements.budget ? form.elements.budget.value : '',
+    details: form.elements.details ? form.elements.details.value.trim() : '',
+    website: form.elements.website ? form.elements.website.value.trim() : '',
+    elapsedMs: Math.max(0, Date.now() - Number(form.dataset.startedAt || Date.now()))
+  };
+
+  if (data.website) return;
+
+  form.dataset.sending = 'true';
+  form.setAttribute('aria-busy', 'true');
+  if (button) button.disabled = true;
+  if (buttonLabel) buttonLabel.textContent = 'Sending';
+
+  setStatus('Sending your message...');
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+
+    let result = {};
+    try {
+      result = await response.json();
+    } catch (error) {
+      result = {};
+    }
+
+    if (!response.ok || !result.ok) {
+      throw new Error(result.error || 'Could not send the message. Please email hello@ceonein.dev directly.');
+    }
+
+    form.reset();
+    form.dataset.startedAt = String(Date.now());
+    setStatus("Message sent. I'll get back to you soon.", 'success');
+  } catch (error) {
+    if (error.name === 'AbortError') {
+      setStatus('The request timed out. Please try again or email hello@ceonein.dev.', 'error');
+    } else {
+      setStatus(error.message || 'Could not send the message. Please email hello@ceonein.dev directly.', 'error');
+    }
+  } finally {
+    delete form.dataset.sending;
+    form.removeAttribute('aria-busy');
+    if (button) button.disabled = false;
+    if (buttonLabel) buttonLabel.textContent = 'Send message';
+  }
 
 }
 
@@ -1215,7 +1329,10 @@ function initTimeZone() {
 
    const formatter = new Intl.DateTimeFormat([], optionsTime);
    updateTime();
-   setInterval(updateTime, 1000);
+   if (window.__ceoneinTimeInterval) {
+      clearInterval(window.__ceoneinTimeInterval);
+   }
+   window.__ceoneinTimeInterval = setInterval(updateTime, 1000);
 
    function updateTime() {
          const dateTime = new Date();
@@ -1232,7 +1349,10 @@ function initTimeZone() {
 function initLazyLoad() {
     // https://github.com/locomotivemtl/locomotive-scroll/issues/225
     // https://github.com/verlok/vanilla-lazyload
-    var lazyLoadInstance = new LazyLoad({ 
+    if (window.__ceoneinLazyLoad) {
+      window.__ceoneinLazyLoad.destroy();
+    }
+    window.__ceoneinLazyLoad = new LazyLoad({
       elements_selector: ".lazy",
     });
 

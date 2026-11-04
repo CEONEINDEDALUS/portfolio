@@ -4,19 +4,27 @@
       <meta charset="utf-8"/>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
       <title>Contact • Ceonein Dedalus</title>
-      <meta name="description" content="Get in touch with Ceonein Dedalus. Systems designer and AI tool builder."/>
+      <meta name="description" content="Contact Ceonein Dedalus about websites, products, brands, AI tools, and systems design work."/>
+      <meta name="theme-color" content="#0A0A0B"/>
+      <link rel="icon" href="/favicon.ico" sizes="any"/>
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
       <meta property="og:title" content="Contact • Ceonein Dedalus"/>
-      <meta property="og:description" content="Get in touch with Ceonein Dedalus. Systems designer and AI tool builder."/>
-      <meta property="og:image" content="img/DSC07033.png"/>
+      <meta property="og:description" content="Contact Ceonein Dedalus about websites, products, brands, AI tools, and systems design work."/>
+      <meta property="og:image" content="https://ceonein.com/img/og-image.jpg"/>
+      <meta property="og:image:width" content="1200"/>
+      <meta property="og:image:height" content="630"/>
+      <meta property="og:image:alt" content="Ceonein Dedalus"/>
       <meta property="og:site_name" content="Ceonein Dedalus"/>
       <meta property="og:locale" content="en"/>
       <meta property="og:type" content="website"/>
-      <meta property="twitter:title" content="Contact • Ceonein Dedalus"/>
-      <meta property="twitter:description" content="Get in touch with Ceonein Dedalus. Systems designer and AI tool builder."/>
-      <meta property="twitter:image" content="img/DSC07033.png"/>
+      <meta property="og:url" content="https://ceonein.com/contact.html"/>
       <meta name="twitter:card" content="summary_large_image"/>
+      <meta property="twitter:title" content="Contact • Ceonein Dedalus"/>
+      <meta property="twitter:description" content="Contact Ceonein Dedalus about websites, products, brands, AI tools, and systems design work."/>
+      <meta property="twitter:image" content="https://ceonein.com/img/og-image.jpg"/>
+      <meta name="twitter:image:alt" content="Ceonein Dedalus"/>
       <meta name="google" content="notranslate"/>
-      <link rel="canonical" href="contact.html"/>
+      <link rel="canonical" href="https://ceonein.com/contact.html"/>
 
       <link rel="preload" as="font" href="NeueMontreal-Regular.otf" type="font/otf" crossorigin="anonymous">
 
@@ -60,7 +68,7 @@
         </div>
         <main class="main" id="contact" data-barba="container" data-barba-namespace="contact">
 
-            <div class="btn btn-hamburger">
+            <div class="btn btn-hamburger" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false">
                 <div class="btn-click magnetic" data-strength="50" data-strength-text="25">
                     <div class="btn-fill"></div>
                     <div class="btn-text">
@@ -176,7 +184,7 @@
                                 </span>
                                 </a>
                             </li>
-                            <li class="btn btn-link btn-menu">
+                            <li class="btn btn-link btn-menu" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false">
                                 <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
                                     <div class="btn-text">
                                         <span class="btn-text-inner">Menu</span>
@@ -197,21 +205,25 @@
 
                 <section class="section terminal-contact" data-scroll-section>
                     <div class="container medium">
-                        <h1 class="terminal-hello">HELLO<span class="dot-blue">.</span></h1>
+                        <h1 class="terminal-hello">HELLO<span class="dot-blue"></span></h1>
 
-                        <form class="mad-libs-form" id="contactForm" novalidate>
+                        <form class="mad-libs-form" id="contactForm" novalidate autocomplete="on">
+                            <div class="hp-field" aria-hidden="true">
+                                <label for="website">Website</label>
+                                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                            </div>
                             <p class="mad-libs-sentence">
                                 Hello, I am
                                 <span class="inline-field-wrap">
-                                    <input type="text" class="inline-input" id="fromName" placeholder="your name" required>
+                                    <input type="text" class="inline-input" id="fromName" name="name" placeholder="your name" aria-label="Your name" autocomplete="name" maxlength="100" required>
                                 </span>
                                 from
                                 <span class="inline-field-wrap">
-                                    <input type="text" class="inline-input" id="fromCompany" placeholder="company">
+                                    <input type="text" class="inline-input" id="fromCompany" name="company" placeholder="company" aria-label="Your company" autocomplete="organization" maxlength="120">
                                 </span>
                                 and I want to talk about
                                 <span class="inline-select-wrap">
-                                    <select id="topicSelect" class="inline-select">
+                                    <select id="topicSelect" name="topic" class="inline-select" aria-label="What do you want to talk about">
                                         <option value="a website">a website</option>
                                         <option value="an identity">an identity</option>
                                         <option value="a product">a product</option>
@@ -228,11 +240,11 @@
                             <div class="form-grid">
                                 <div class="form-field">
                                     <label for="fromEmail">Email</label>
-                                    <input type="email" id="fromEmail" placeholder="you@domain.com" required>
+                                    <input type="email" id="fromEmail" name="email" placeholder="you@domain.com" autocomplete="email" inputmode="email" maxlength="254" required>
                                 </div>
                                 <div class="form-field">
                                     <label for="budgetSelect">Budget</label>
-                                    <select id="budgetSelect" class="budget-select">
+                                    <select id="budgetSelect" name="budget" class="budget-select">
                                         <option value="">&mdash; select &mdash;</option>
                                         <option value="Under €5k">&euro; Under 5k</option>
                                         <option value="€5–15k">&euro; 5&ndash;15k</option>
@@ -245,7 +257,7 @@
 
                             <div class="form-field details-field">
                                 <label for="detailsField">Details</label>
-                                <textarea id="detailsField" rows="3" placeholder="Tell me about the project..."></textarea>
+                                <textarea id="detailsField" name="details" rows="3" placeholder="Tell me about the project..." maxlength="5000"></textarea>
                             </div>
 
                             <div class="form-submit-row">
@@ -254,6 +266,10 @@
                                     <span class="dot-blue"></span>
                                 </button>
                             </div>
+                            <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+                            <noscript>
+                                <p class="form-status is-error">JavaScript is required to send this form. Please email <a href="mailto:hello@ceonein.dev">hello@ceonein.dev</a> instead.</p>
+                            </noscript>
                         </form>
 
                         <p class="prefer-email">Prefer email? Reach out directly at <a href="mailto:hello@ceonein.dev">hello@ceonein.dev</a></p>
@@ -349,46 +365,5 @@
         <script src="lazyload.min.js"></script>
         <script src="locomotive-scroll.min.js"></script>
         <script defer src="index-new.js"></script>
-        <script>
-            (function () {
-                var form = document.getElementById('contactForm');
-                if (!form) return;
-
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    var name = document.getElementById('fromName').value.trim();
-                    var company = document.getElementById('fromCompany').value.trim();
-                    var topic = document.getElementById('topicSelect').value;
-                    var email = document.getElementById('fromEmail').value.trim();
-                    var budget = document.getElementById('budgetSelect').value;
-                    var details = document.getElementById('detailsField').value.trim();
-
-                    if (!name || !email) {
-                        if (!name) document.getElementById('fromName').focus();
-                        else document.getElementById('fromEmail').focus();
-                        return;
-                    }
-
-                    var subject = 'Project inquiry: ' + topic;
-                    var bodyLines = [
-                        'Hello, I am ' + name + (company ? ' from ' + company : '') + ' and I want to talk about ' + topic + '.',
-                        '',
-                        'Email: ' + email,
-                        'Budget: ' + (budget || 'Not specified'),
-                        '',
-                        'Details:',
-                        details || '(none provided)'
-                    ];
-                    var body = bodyLines.join('\n');
-
-                    var mailto = 'mailto:hello@ceonein.dev'
-                        + '?subject=' + encodeURIComponent(subject)
-                        + '&body=' + encodeURIComponent(body);
-
-                    window.location.href = mailto;
-                });
-            })();
-        </script>
 </body>
 </html>
