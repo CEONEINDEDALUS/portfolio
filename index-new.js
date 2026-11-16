@@ -472,11 +472,12 @@ function initPageTransitions() {
       name: 'default',
       once(data) {
         // do something once on the initial page load
-        initSmoothScroll(data.next.container);
+        // barba passes T.current directly (not {current, next}) to once
+        initSmoothScroll(data.container);
         initScript();
         initCookieViews();
         // Home gets the video intro; every other page gets the quick word loader
-        if (data.next.namespace === 'home') {
+        if (data.namespace === 'home') {
           initLoaderHome();
         } else {
           initLoader();
