@@ -104,17 +104,13 @@ function initLoaderHome() {
       });
     }
 
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var saveData = navigator.connection && navigator.connection.saveData;
-
-    // Skip the video for people who asked for less motion / less data, or if there is no video
-    if (!video || reduceMotion || saveData) {
+    // Video is 10s long. Hard cap at 12s, and give up after 3.5s if it never actually starts
+    // (slow network, autoplay blocked, low-power mode).
+    if (!video) {
       crossfadeToEmblem();
       return;
     }
 
-    // Video is 10s long. Hard cap at 12s, and give up after 3.5s if it never actually starts
-    // (slow network, autoplay blocked, low-power mode).
     var fallback = setTimeout(crossfadeToEmblem, 12000);
     var startGuard = setTimeout(crossfadeToEmblem, 3500);
 
