@@ -420,13 +420,15 @@ function initPageTransitions() {
   barba.hooks.after(() => {
     select('html').classList.remove('is-transitioning');
     // reinit locomotive scroll
-    scroll.init();
-    scroll.stop();
+    if (scroll) {
+      scroll.init();
+      scroll.stop();
+    }
   });
 
   // scroll to the top of the page
   barba.hooks.enter(() => {
-    scroll.destroy();
+    if (scroll) scroll.destroy();
   });
 
   // scroll to the top of the page
@@ -446,7 +448,11 @@ function initPageTransitions() {
         }
       }, 100);
     } else {
-      window.scrollTo(0, 0);
+      if (scroll) {
+        scroll.scrollTo(0);
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
   });
 
@@ -489,7 +495,7 @@ function initPageTransitions() {
       },
       async beforeEnter(data) {
         ScrollTrigger.getAll().forEach(t => t.kill());
-        scroll.destroy();
+        if (scroll) scroll.destroy();
         initSmoothScroll(data.next.container);
         initScript(); 
       },
