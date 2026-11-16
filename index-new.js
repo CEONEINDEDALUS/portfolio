@@ -7,7 +7,17 @@ const select = (e) => document.querySelector(e);
 const selectAll = (e) => document.querySelectorAll(e);
 //const container = select('.site-main');
 
-initPageTransitions();
+if (typeof barba !== 'undefined') {
+  initPageTransitions();
+} else {
+  // Safety net: if the page-transition library fails to load, still show a working site
+  // (normal page loads, native scrolling) instead of freezing on the loading screen.
+  console.error('Barba failed to load - running without page transitions.');
+  scroll = { start() {}, stop() {}, update() {}, destroy() {}, init() {}, scrollTo() {} };
+  initScript();
+  const loader = document.querySelector('.loading-container');
+  if (loader) loader.style.display = 'none';
+}
 
 // Animation - First Page Load
 function initLoaderHome() { 
@@ -94,25 +104,45 @@ function initLoaderHome() {
       });
     }
 
-    var fallback = setTimeout(crossfadeToEmblem, 15500);
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
 
-    if (video) {
-      video.addEventListener("ended", function onEnded() {
+    // Skip the video for people who asked for less motion / less data, or if there is no video
+    if (!video || reduceMotion || saveData) {
+      crossfadeToEmblem();
+      return;
+    }
+
+    // Video is 10s long. Hard cap at 12s, and give up after 3.5s if it never actually starts
+    // (slow network, autoplay blocked, low-power mode).
+    var fallback = setTimeout(crossfadeToEmblem, 12000);
+    var startGuard = setTimeout(crossfadeToEmblem, 3500);
+
+    video.addEventListener("playing", function onPlaying() {
+      clearTimeout(startGuard);
+      video.removeEventListener("playing", onPlaying);
+    });
+
+    video.addEventListener("ended", function onEnded() {
+      clearTimeout(fallback);
+      clearTimeout(startGuard);
+      video.removeEventListener("ended", onEnded);
+      crossfadeToEmblem();
+    });
+
+    video.addEventListener("error", function () {
+      clearTimeout(fallback);
+      clearTimeout(startGuard);
+      crossfadeToEmblem();
+    });
+
+    var playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {
         clearTimeout(fallback);
-        video.removeEventListener("ended", onEnded);
+        clearTimeout(startGuard);
         crossfadeToEmblem();
       });
-
-      var playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(function() {
-          clearTimeout(fallback);
-          crossfadeToEmblem();
-        });
-      }
-    } else {
-      clearTimeout(fallback);
-      crossfadeToEmblem();
     }
   }
 
@@ -443,7 +473,12 @@ function initPageTransitions() {
         initSmoothScroll(data.next.container);
         initScript();
         initCookieViews();
-        initLoader();
+        // Home gets the video intro; every other page gets the quick word loader
+        if (data.next.namespace === 'home') {
+          initLoaderHome();
+        } else {
+          initLoader();
+        }
       },
       async leave(data) {
         // animate loading screen in
@@ -461,21 +496,6 @@ function initPageTransitions() {
         scroll.destroy();
         initSmoothScroll(data.next.container);
         initScript(); 
-      },
-    }, 
-    {
-      name: 'to-home',
-      from: {
-      },
-      to: {
-        namespace: ['home']
-      },
-      once(data) {
-        // do something once on the initial page load
-        initSmoothScroll(data.next.container);
-        initScript();
-        initCookieViews();
-        initLoaderHome();
       },
     }]
   });
