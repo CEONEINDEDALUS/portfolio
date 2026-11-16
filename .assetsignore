@@ -1,0 +1,12 @@
+# Keep private/server-side files OUT of the public website.
+# (wrangler.jsonc serves the whole project folder as static assets.)
+.dev.vars
+.dev.vars.*
+.git
+.gitignore
+.wrangler
+dist
+functions
+worker.js
+wrangler.jsonc
+.assetsignore
