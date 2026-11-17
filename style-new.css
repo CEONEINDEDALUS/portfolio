@@ -1191,8 +1191,9 @@ main.touch .main-wrap {
    padding-right: calc(var(--container-padding) * .5);
 }
 
+/* Hidden below 1024px only where a tile list replaces it (see .desktop-only in index.html) */
 @media screen and (max-width: 1024px) {
-   .large-work-grid {
+   .large-work-grid.desktop-only {
       display: none;
    }
 }
@@ -1659,13 +1660,6 @@ main.touch .main-wrap {
       padding-top: 0;
    }
 
-   .work-tiles-home .container ul li:nth-child(3){
-      display: none;
-   }
-
-   .work-tiles-home .container ul li:nth-child(4){
-      display: none;
-   }
 }
 
 /* ------------------------- Work Grid - Fade -------------------------------------------------- */
@@ -4199,4 +4193,102 @@ select:focus-visible,
 textarea:focus-visible {
    outline: 2px solid var(--color-blue);
    outline-offset: 3px;
+}
+
+/* ==========================================================================
+   Mobile fixes
+   ========================================================================== */
+
+/* Credit (top left): anchor the last name to the right edge of the first name
+   so "Dedalus" never overlaps "Ceonein" */
+.btn-link.btn-left-top .snellenberg {
+   left: 100%;
+   transform: translateX(0);
+}
+
+/* Environment / repository cards sit on light sections: use dark text + borders */
+.env-card {
+   border-color: var(--color-border);
+}
+
+.env-card-header,
+.env-card-footer {
+   border-color: var(--color-border);
+}
+
+.env-card-row {
+   color: var(--color-text);
+}
+
+.env-card-footer a {
+   color: var(--color-text);
+   text-decoration: underline;
+}
+
+@media screen and (max-width: 720px) {
+
+   /* Intro paragraphs were capped at 14em, leaving ~40% of the screen empty */
+   .home-intro .flex-col:nth-child(2) p {
+      max-width: 32em;
+   }
+
+   /* Round button: sit below the text in normal flow instead of floating over it */
+   .home-intro .flex-col:nth-child(2) .btn {
+      position: relative;
+      bottom: auto;
+      right: auto;
+      transform: none;
+   }
+
+   /* Project / work-method lists: stack title above description */
+   .large-work-grid .work-items h4 {
+      font-size: clamp(1.9em, 9vw, 2.6em);
+   }
+
+   /* The container already provides the side padding, so columns need none */
+   .large-work-grid .work-items .flex-col,
+   .large-work-grid .work-items .flex-col:nth-child(1),
+   .large-work-grid .work-items .flex-col:nth-child(2),
+   .large-work-grid .work-items .flex-col:nth-child(3) {
+      width: 100%;
+      padding-left: 0;
+      padding-right: 0;
+   }
+
+   .large-work-grid .work-items .flex-col:nth-child(2) {
+      padding-top: .75em;
+   }
+
+   .large-work-grid .work-items .flex-col:nth-child(3) {
+      padding-top: .25em;
+   }
+
+   .large-work-grid .grid-sub-title .flex-col:nth-child(1) {
+      width: 100%;
+      padding-left: 0;
+   }
+
+   .large-work-grid .row {
+      padding-top: calc(var(--section-padding) / 3);
+      padding-bottom: calc(var(--section-padding) / 3);
+   }
+
+   /* Long unbroken strings (URLs, commands) must wrap instead of overflowing */
+   .text-wrap a,
+   .env-card-row,
+   .env-card-footer {
+      overflow-wrap: anywhere;
+   }
+
+   .env-card-row {
+      flex-wrap: wrap;
+   }
+}
+
+@media screen and (max-width: 1024px) {
+
+   /* "Other projects" label on case-study pages was touching the button above it */
+   .work-tiles-home .grid-sub-title {
+      padding-top: calc(var(--section-padding) * .75);
+   }
 }
