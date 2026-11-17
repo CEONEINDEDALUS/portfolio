@@ -219,6 +219,24 @@ main.touch .main-wrap {
    }
 }
 
+/* Keep intro video/emblem within the mobile viewport so nothing is cropped off-screen */
+@media screen and (max-width: 720px) {
+   .loading-container .loading-intro-video,
+   .loading-container .loading-intro-emblem {
+      width: auto;
+      height: auto;
+      max-width: 92vw;
+      max-height: 92vh;
+   }
+   .loading-container .loading-intro-video {
+      object-fit: contain;
+   }
+   .loading-container .loading-intro-emblem {
+      object-fit: contain;
+      width: min(80vw, 80vh);
+      height: min(80vw, 80vh);
+   }
+}
 
 /* ------------------------- Top Bar -------------------------------------------------- */
 
@@ -964,6 +982,13 @@ main.touch .main-wrap {
    .home-header .personal-image {
       top: -5%;
       height: 105%;
+   }
+
+   /* Portrait photo must not overflow the narrow mobile viewport */
+   .home-header .personal-image img {
+      width: 100%;
+      height: auto;
+      max-height: none;
    }
 
    .home-header .big-name {
