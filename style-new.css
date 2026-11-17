@@ -1095,9 +1095,17 @@ main.touch .main-wrap {
       width: 3em;
       height: 3em;
    }
-   
-}
 
+   /* Remove small animated things on mobile */
+   .mouse-pos-list-btn,
+   .mouse-pos-list-span,
+   .mouse-pos-list-image,
+   .digital-ball,
+   .load-icon {
+      display: none;
+   }
+
+}
 
 /* ------------------------- Home - Intro -------------------------------------------------- */
 
