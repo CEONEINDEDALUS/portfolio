@@ -1,4 +1,4 @@
-/* ------------------------- Components ® Code by Dennis -------------------------------------------------- */
+/* ------------------------- Components -------------------------------------------------- */
 
 /* ------------------------- Span Lines H4 -------------------------------------------------- */
 
@@ -71,7 +71,7 @@
    content: "";
    display: block;
    position: absolute;
-   background: var(--color-white);
+    background: var(--color-dark-dark);
    height: 750%;
    left: 50%;
    border-radius: 50%;

@@ -96,9 +96,9 @@ function initLoaderHome() {
       });
 
       gsap.to(".loading-intro-emblem", {
-        duration: .8,
+        duration: .5,
         opacity: 1,
-        delay: .1,
+        delay: 0,
         ease: "Power2.easeInOut",
         onComplete: revealSite
       });
@@ -147,9 +147,9 @@ function initLoaderHome() {
     var tl2 = gsap.timeline();
 
     tl2.to(".loading-intro-media", {
-      duration: .5,
+      duration: .4,
       opacity: 0,
-      delay: .6,
+      delay: .45,
       ease: "Power2.easeInOut"
     });
 

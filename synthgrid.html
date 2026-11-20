@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Synthgrid • Ceonein Dedalus</title>
       <meta name="description" content="Synthgrid edits CSV and XLSX files from plain-English instructions instead of formulas or macros, using Groq for fast inference."/>
-      <meta name="theme-color" content="#0A0A0B"/>
+      <meta name="theme-color" content="#080606"/>
       <link rel="icon" href="/favicon.ico" sizes="any"/>
       <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
       <meta property="og:title" content="Synthgrid • Ceonein Dedalus"/>
@@ -26,13 +26,13 @@
       <meta name="google" content="notranslate"/>
       <link rel="canonical" href="https://ceonein.com/synthgrid.html"/>
 
-      <link rel="preload" as="font" href="fonts/NeueMontreal-Regular.otf" type="font/otf" crossorigin="anonymous">
-
-      <link href="normalize.css" rel="stylesheet">
+      <link rel="preload" as="font" href="fonts/Montserrat-Var.woff" type="font/woff" crossorigin="anonymous">
+<link href="normalize.css" rel="stylesheet">
       <link href="locomotive-scroll.css" rel="stylesheet">
       <link href="styleguide.css" rel="stylesheet">
       <link href="components.css" rel="stylesheet">
       <link href="style-new.css" rel="stylesheet">
+<link href="redesign.css" rel="stylesheet">
    </head>
 
     <body data-barba="wrapper">
@@ -143,86 +143,28 @@
                 </div>
             </div>
             <div class="main-wrap" data-scroll-container>
-
-                <header class="section home-header theme-dark" data-scroll-section>
-                    <div class="overlay get-height once-in once-in-secondary">
-                        <div class="hanger">
-                            <p><span>Synthgrid </span><span>Natural-Language Spreadsheet</span></p>
-                        </div>
-                    </div>
-                    <div class="nav-bar">
-                        <div class="credits-top">
-                            <div class="btn btn-link btn-left-top">
-                                <a href="index.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                <span class="btn-text">
-                                    <div class="credit"><span>&copy;</span></div><div class="cbd"><span class="code-by">Built by </span><span class="dennis"><span class="dennis-span">Ceonein</span> <span class="snellenberg">Dedalus</span></span></span></div>
-                                </span>
-                                </a>
-                            </div>
-                        </div>
-                        <ul class="links-wrap">
-                        <li class="btn btn-link">
-                            <a href="index.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                            <span class="btn-text">
-                                <span class="btn-text-inner">Home</span>
-                            </span>
-                            </a>
-                        </li>
-                        <li class="btn btn-link active">
-                            <a href="projects.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                            <span class="btn-text">
-                                <span class="btn-text-inner">Projects</span>
-                            </span>
-                            </a>
-                        </li>
-                        <li class="btn btn-link">
-                            <a href="about.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                            <span class="btn-text">
-                                <span class="btn-text-inner">About</span>
-                            </span>
-                            </a>
-                        </li>
-                        <li class="btn btn-link">
-                            <a href="contact.html" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                            <span class="btn-text">
-                                <span class="btn-text-inner">Contact</span>
-                            </span>
-                            </a>
-                        </li>
-                            <li class="btn btn-link btn-menu" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false">
-                            <div class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                <div class="btn-text">
-                                    <span class="btn-text-inner">Menu</span>
-                                </div>
-                            </div>
-                        </li>
-                        </ul>
-                    </div>
-                    <div class="big-name">
-                        <div class="name-h1" data-scroll data-scroll-direction="horizontal" data-scroll-speed="4" data-scroll-position="top">
-                            <div class="name-wrap">
-                                <h1 class="no-select once-in once-in-secondary">Synthgrid<span class="spacer">&mdash;</span></h1>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="white-block"></div>
-                </header>
-
-                <section class="section home-intro about-tools-section" data-scroll-section>
-                    <div class="container medium">
-                        <p class="eyebrow-tag animate">[ Project ]</p>
-                        <div class="row">
-                            <div class="flex-col">
-                                <h4 class="span-lines animate">Describe the transformation. Get the spreadsheet.</h4>
-                            </div>
-                            <div class="flex-col">
-                                <div class="text-wrap fade-in animate">
-                                    <p>Synthgrid edits CSV and XLSX files from a plain-English instruction &mdash; "merge these two columns", "flag rows where revenue dropped", "convert this to weekly totals" &mdash; instead of a formula or a macro. It uses Groq's inference for the language step, which keeps the round-trip fast enough to feel interactive rather than batch.</p>
-                                    <p style="margin-top: 1rem;">Every change is shown as a diff before it's applied, so nothing gets overwritten silently. Only the instruction text is sent to the Groq API; the underlying data stays local. Source and issue tracker: <a href="https://github.com/CEONEINDEDALUS/synthgrid" target="_blank">github.com/CEONEINDEDALUS/synthgrid</a>.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="env-card animate">
+<header class="section page-hero theme-dark" data-scroll-section>
+  <div class="nav-bar">
+    <div class="credits-top"><div class="btn btn-link btn-left-top"><a href="index.html" class="btn-click magnetic" data-strength="20" data-strength-text="10"><span class="btn-text"><span class="logo"><span class="logo-mark"></span>Ceonein Dedalus</span></span></a></div></div>
+    <ul class="links-wrap">
+      <li class="btn btn-link"><a href="projects.html" class="btn-click magnetic" data-strength="20" data-strength-text="10"><span class="btn-text"><span class="btn-text-inner">Projects</span></span></a></li>
+      <li class="btn btn-link"><a href="about.html" class="btn-click magnetic" data-strength="20" data-strength-text="10"><span class="btn-text"><span class="btn-text-inner">About</span></span></a></li>
+      <li class="btn btn-link"><a href="contact.html" class="btn-click magnetic" data-strength="20" data-strength-text="10"><span class="btn-text"><span class="btn-text-inner">Contact</span></span></a></li>
+      <li class="btn btn-link btn-menu" role="button" tabindex="0" aria-label="Open navigation menu" aria-expanded="false"><div class="btn-click magnetic" data-strength="20" data-strength-text="10"><div class="btn-text"><span class="btn-text-inner">Menu</span></div></div></li>
+    </ul>
+  </div>
+  <div class="hero-bg" aria-hidden="true"><div class="hero-glow"></div><div class="hero-emblem"></div></div>
+  <div class="rd-container page-hero-inner">
+    <p class="crumb"><a href="projects.html">Projects</a> / Synthgrid</p>
+    <h1 class="page-title once-in">Synthgrid</h1>
+    <div class="once-in once-in-secondary"><p class="page-lead">Natural-Language Spreadsheet</p><ul class="hero-chips"><li>Python</li><li>Groq</li></ul></div>
+  </div>
+</header>
+<section class="section rd-section detail" data-scroll-section>
+  <div class="rd-container detail-grid">
+    <div class="detail-text fade-in animate"><h2 class="detail-lead">Describe the transformation. Get the spreadsheet.</h2><p>Synthgrid edits CSV and XLSX files from a plain-English instruction &mdash; "merge these two columns", "flag rows where revenue dropped", "convert this to weekly totals" &mdash; instead of a formula or a macro. It uses Groq's inference for the language step, which keeps the round-trip fast enough to feel interactive rather than batch.</p><p>Every change is shown as a diff before it's applied, so nothing gets overwritten silently. Only the instruction text is sent to the Groq API; the underlying data stays local. Source and issue tracker: <a href="https://github.com/CEONEINDEDALUS/synthgrid" target="_blank">github.com/CEONEINDEDALUS/synthgrid</a>.</p>
+      <div class="detail-actions"><div class="btn btn-normal "><a href="https://github.com/CEONEINDEDALUS" target="_blank" rel="noopener" class="btn-click magnetic" data-strength="25" data-strength-text="15"><div class="btn-fill"></div><span class="btn-text"><span class="btn-text-inner">View on GitHub</span></span></a></div></div></div>
+    <div class="detail-side"><div class="env-card animate">
                             <div class="env-card-header">
                                 <span class="env-dot"></span>
                                 <span>~ / repository</span>
@@ -246,217 +188,46 @@
                             <div class="env-card-footer">
                                 <span class="env-prompt">$</span> git clone <a href="https://github.com/CEONEINDEDALUS/synthgrid" target="_blank">github.com/CEONEINDEDALUS/synthgrid</a>
                             </div>
-                        </div>
-                        <div class="tag-group animate">
-                            <p class="tag-group-label">Built with</p>
-                            <ul class="tag-list">
-                                <li>Python</li>
-                                <li>Groq API</li>
-                                <li>pandas</li>
-                                <li>openpyxl</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section class="section work-grid large-work-grid" data-scroll-section>
-                    <div class="container">
-                        <div class="grid-sub-title">
-                            <div class="flex-col">
-                                <h5>How it works</h5>
-                            </div>
-                        </div>
-                        <ul class="work-items numbered-items">
-                            <li class="visible">
-                                <div class="stripe animate"></div>
-                                <div class="row">
-                                    <div class="flex-col">
-                                        <h4><span class="item-number">01</span><span>Instruction to transform</span></h4>
-                                    </div>
-                                    <div class="flex-col animate">
-                                        <p>A natural-language request is compiled into a concrete pandas operation or formula, not run as an opaque black box.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="visible">
-                                <div class="stripe animate"></div>
-                                <div class="row">
-                                    <div class="flex-col">
-                                        <h4><span class="item-number">02</span><span>Preview before apply</span></h4>
-                                    </div>
-                                    <div class="flex-col animate">
-                                        <p>Every transform shows a before/after diff of the affected rows and columns first, so a bad instruction is caught before it touches the file.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="visible">
-                                <div class="stripe animate"></div>
-                                <div class="row">
-                                    <div class="flex-col">
-                                        <h4><span class="item-number">03</span><span>Local files, transparent network use</span></h4>
-                                    </div>
-                                    <div class="flex-col animate">
-                                        <p>Spreadsheet data is processed on disk. The only thing that leaves the machine is the instruction text sent to Groq.</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <div class="stripe last animate"></div>
-                        </ul>
-                    </div>
-                </section>
-
-                <section class="section center-grid-btn center-grid-btn-home" data-scroll-section>
-                   <div class="container">
-                      <div class="grid-after-btn">
-                         <div class="btn btn-normal">
-                            <a href="https://github.com/CEONEINDEDALUS/synthgrid" class="btn-click magnetic" data-strength="25" data-strength-text="15" target="_blank">
-                               <div class="btn-fill"></div>
-                               <span class="btn-text">
-                                  <span class="btn-text-inner change">View on GitHub</span>
-                               </span>
-                            </a>
-                         </div>
-                      </div>
-                   </div>
-                </section>
-
-                <section class="section work-tiles work-tiles-home" data-scroll-section>
-                    <div class="container">
-                        <div class="grid-sub-title">
-                            <div class="flex-col">
-                                <h5>Other projects</h5>
-                            </div>
-                        </div>
-                        <ul>
-                  <li class="python ai visible">
-            <div class="single-tile-wrap">
-               <a href="veronica.html" class="row">
-                  <div class="flex-col">
-                     <h4><span>Veronica</span></h4>
-                     <div class="stripe"></div>
-                  </div>
-                  <div class="flex-col">
-                     <p>Offline Document Search</p>
-                  </div>
-                  <div class="flex-col">
-                     <p>Python, Ollama</p>
-                  </div>
-               </a>
-            </div>
-         </li>
-                  <li class="python linux visible">
-            <div class="single-tile-wrap">
-               <a href="raven.html" class="row">
-                  <div class="flex-col">
-                     <h4><span>Raven</span></h4>
-                     <div class="stripe"></div>
-                  </div>
-                  <div class="flex-col">
-                     <p>Local System Assistant</p>
-                  </div>
-                  <div class="flex-col">
-                     <p>Python, Linux</p>
-                  </div>
-               </a>
-            </div>
-         </li>
-                  <li class="rust gtk visible">
-            <div class="single-tile-wrap">
-               <a href="musiq.html" class="row">
-                  <div class="flex-col">
-                     <h4><span>Musiq</span></h4>
-                     <div class="stripe"></div>
-                  </div>
-                  <div class="flex-col">
-                     <p>Terminal Music Player</p>
-                  </div>
-                  <div class="flex-col">
-                     <p>Rust, GTK</p>
-                  </div>
-               </a>
-            </div>
-         </li>
-                        </ul>
-                    </div>
-                </section>
-
-                <div class="footer-rounded-div" data-scroll-section>
-                    <div class="rounded-div-wrap">
-                        <div class="rounded-div"></div>
-                    </div>
-                </div>
-                <div class="footer-wrap footer-footer-wrap theme-dark" data-scroll-section>
-                    <footer class="section footer" data-scroll data-scroll-speed="-4" data-scroll-position="bottom">
-                        <div class="container medium">
-                            <div class="row">
-                                <div class="flex-col">
-                                    <div class="arrow"><svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg"><g stroke="#FFFFFF" stroke-width="1.5" fill="none"><polyline points="2.76923077 0 12 0 12 9.23076923"></polyline><line x1="12" y1="0" x2="0" y2="12"></line></g></svg></div>
-                                    <h2><span><div class="profile-picture"></div> Let&rsquo;s build  </span><span>something</span></h2>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="flex-col">
-                                    <div class="stripe"></div>
-                                    <div class="btn-fixed">
-                                        <div class="btn btn-round" data-scroll data-scroll-speed="-1" data-scroll-direction="horizontal" data-scroll-position="bottom" data-scroll-offset="-50%, 0">
-                                            <a href="contact.html" class="btn-click magnetic " data-strength="100" data-strength-text="50">
-                                                <div class="btn-fill"></div>
-                                                <span class="btn-text">
-                                                    <span class="btn-text-inner">Contact me</span>
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="flex-col">
-                                    <div class="btn btn-normal">
-                                        <a href="https://github.com/CEONEINDEDALUS" class="btn-click magnetic" data-strength="25" data-strength-text="15" target="_blank">
-                                        <div class="btn-fill"></div>
-                                        <span class="btn-text">
-                                            <span class="btn-text-inner change">github.com/CEONEINDEDALUS</span>
-                                        </span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="container no-padding">
-                            <div class="row bottom-footer">
-                                <div class="flex-col">
-                                    <div class="credits">
-                                        <h5>Version</h5>
-                                        <p>2025 &copy; Edition</p>
-                                    </div>
-                                    <div class="time">
-                                        <h5>Local time</h5>
-                                        <p><span id="timeSpan">09:41 PM CET</span></p>
-                                    </div>
-                                </div>
-                                <div class="flex-col">
-                                    <div class="socials">
-                                        <h5>Socials</h5>
-                                        <ul>
-                                            <li class="btn btn-link btn-link-external">
-                                                <a href="https://github.com/CEONEINDEDALUS" target="_blank" class="btn-click magnetic" data-strength="20" data-strength-text="10">
-                                                    <span class="btn-text">
-                                                        <span class="btn-text-inner">GitHub</span>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                        <div class="stripe"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <div class="overlay overlay-gradient"></div>
-                </div>
-
-            </div>
-        </main>
+                        </div><h5 class="side-label">Built with</h5><ul class="tag-chips"><li>Python</li><li>Groq API</li><li>pandas</li><li>openpyxl</li></ul></div>
+  </div>
+</section>
+<section class="section rd-section principles method" data-scroll-section>
+  <div class="rd-container"><h2 class="rd-h2">How it works</h2><div class="cards cards-3"><article class="card"><span class="num">01</span><h3>Instruction to transform</h3><p>A natural-language request is compiled into a concrete pandas operation or formula, not run as an opaque black box.</p></article><article class="card"><span class="num">02</span><h3>Preview before apply</h3><p>Every transform shows a before/after diff of the affected rows and columns first, so a bad instruction is caught before it touches the file.</p></article><article class="card"><span class="num">03</span><h3>Local files, transparent network use</h3><p>Spreadsheet data is processed on disk. The only thing that leaves the machine is the instruction text sent to Groq.</p></article></div></div>
+</section>
+<section class="section rd-section work other" data-scroll-section>
+  <div class="rd-container"><h2 class="rd-h2">Other projects</h2><ul class="work-list"><li data-tags="python ai"><a class="work-row" href="veronica.html"><span><span class="work-name">Veronica</span><span class="work-desc">Offline Document Search</span><span class="work-tech"><em>Python</em><em>Ollama</em></span></span><span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><line x1="6" y1="18" x2="18" y2="6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><polyline points="8,6 18,6 18,16" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li><li data-tags="python"><a class="work-row" href="raven.html"><span><span class="work-name">Raven</span><span class="work-desc">Local System Assistant</span><span class="work-tech"><em>Python</em><em>Linux</em></span></span><span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><line x1="6" y1="18" x2="18" y2="6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><polyline points="8,6 18,6 18,16" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li><li data-tags="rust"><a class="work-row" href="musiq.html"><span><span class="work-name">Musiq</span><span class="work-desc">Terminal Music Player</span><span class="work-tech"><em>Rust</em><em>GTK</em></span></span><span class="work-arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><line x1="6" y1="18" x2="18" y2="6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><polyline points="8,6 18,6 18,16" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></li></ul></div>
+</section>
+<div class="footer-rounded-div" data-scroll-section>
+  <div class="rounded-div-wrap"><div class="rounded-div"></div></div>
+</div>
+<div class="footer-wrap footer-footer-wrap theme-dark" data-scroll-section>
+    <footer class="section footer" data-scroll data-scroll-speed="-4" data-scroll-position="bottom">
+      <div class="container">
+        <div class="arrow" aria-hidden="true"></div>
+        <div class="footer-cta">
+          <h2 class="footer-title">Let’s build<br>something useful</h2>
+          <div class="footer-actions">
+            <div class="btn btn-normal "><a href="contact.html" class="btn-click magnetic" data-strength="25" data-strength-text="15"><div class="btn-fill"></div><span class="btn-text"><span class="btn-text-inner">Start a project</span></span></a></div>
+            <div class="btn btn-normal btn-outline"><a href="https://github.com/CEONEINDEDALUS" target="_blank" rel="noopener" class="btn-click magnetic" data-strength="25" data-strength-text="15"><div class="btn-fill"></div><span class="btn-text"><span class="btn-text-inner">GitHub</span></span></a></div>
+          </div>
+        </div>
+        <div class="footer-cols">
+          <div><h5>Pages</h5><ul><li><a href="index.html">Home</a></li><li><a href="projects.html">Projects</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+          <div><h5>Projects</h5><ul><li><a href="veronica.html">Veronica</a></li><li><a href="synthgrid.html">Synthgrid</a></li><li><a href="raven.html">Raven</a></li><li><a href="musiq.html">Musiq</a></li></ul></div>
+          <div><h5>Elsewhere</h5><ul><li><a href="https://github.com/CEONEINDEDALUS" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+          <div><h5>Local time</h5><p><span id="timeSpan">09:41 PM CET</span></p></div>
+        </div>
+      </div>
+      <div class="footer-word" aria-hidden="true">Ceonein</div>
+      <div class="container footer-bottom">
+        <p>© 2026 Ceonein Dedalus</p>
+        <button class="back-to-top-btn" type="button">Back to top</button>
+      </div>
+    </footer>
+    <div class="overlay overlay-gradient"></div>
+  </div>
+</div>
+  </main>
         <script src="jquery-3.5.1.min.js"></script>
         <script src="js.cookie.min.js"></script>
         <script src="gsap.min.js"></script>
@@ -464,6 +235,6 @@
         <script src="barba.min.js"></script>
         <script src="lazyload.min.js"></script>
         <script src="locomotive-scroll.min.js"></script>
-        <script defer src="index-new.js"></script>
+        <script defer src="index-new.js"></script> <script defer src="redesign.js"></script>
 </body>
 </html>
