@@ -55,7 +55,6 @@ h1, h2, h3, h4 { font-family: var(--font-display); }
 h5 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .06em; color: var(--color-muted); text-transform: none; font-weight: 500; }
 
 .ln, .hero-title *, .motto-xl *, .footer-title * { font-weight: inherit; }
-.ital { font-family: var(--font-accent) !important; font-style: italic !important; font-weight: 500 !important; text-transform: none; color: var(--color-red-bright); letter-spacing: 0; }
 
 /* ---------- Buttons (pill style) ---------- */
 .btn-click { border-radius: 999px; height: 3.4em; }
@@ -134,7 +133,6 @@ h5 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .06em; col
 .hero-inner { position: relative; z-index: 5; width: 100%; padding-bottom: clamp(28px, 6vh, 64px); padding-top: 120px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; align-items: end; }
 .hero-title { font-family: var(--font-display); font-weight: 800; font-size: clamp(2.7rem, 9.2vw, 9.6rem); line-height: .94; letter-spacing: -.025em; text-transform: uppercase; margin: 0 0 clamp(20px, 3.5vh, 36px); color: #fff; }
 .hero-title .ln { display: block; white-space: nowrap; }
-.hero-title .ital { font-size: 1.04em; padding: 0 .02em; }
 .hero-sub { max-width: 30em; }
 .hero-sub p { font-size: clamp(1rem, 1.25vw, 1.2rem); color: #cfc8c7; margin: 0 0 1.4rem; line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
@@ -201,7 +199,6 @@ h5 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .06em; col
 .motto-xl .ln { display: block; }
 .motto-xl .ln:nth-child(2) { text-align: right; }
 .motto-xl .ln:nth-child(3) { padding-left: 12%; }
-.motto-xl .ital { font-size: 1.04em; }
 .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
 .card { background: linear-gradient(160deg, var(--color-surface-2), var(--color-dark)); border: 1px solid var(--color-border); border-radius: var(--radius); padding: clamp(1.25rem, 2vw, 2rem); display: flex; flex-direction: column; min-height: 17rem; transition: border-color .4s, box-shadow .4s; }
 .card:hover { border-color: rgba(227,30,36,.8); box-shadow: 0 0 44px rgba(227,30,36,.22); }
@@ -372,3 +369,54 @@ h5 { font-family: var(--font-body); font-size: .8rem; letter-spacing: .06em; col
   .hero-figure::after { height: 30%; }
   .hero-emblem { top: 34%; margin-top: -55vw; }
 }
+
+/* =========================================================
+   unslop pass (polish): quiet chrome, one accent, mono meta.
+   Method by Damir Sokolovsky (@heydamir), CC BY 4.0.
+   ========================================================= */
+:root { --font-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', 'JetBrains Mono', Consolas, monospace; --r-control: 10px; }
+
+/* glows, washes and spinning filler out */
+.hero-glow, .hero-emblem, .globe-wrap-img::before { display: none; }
+.logo-mark { box-shadow: none; }
+.hero-quick { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--color-surface); }
+.card, .env-card, .mad-libs-form { background: var(--color-surface); box-shadow: none; }
+.card:hover, .card--cta:hover { box-shadow: none; border-color: rgba(255,255,255,.28); }
+.card--cta:hover { background: var(--color-red-dark); }
+
+/* type: weights 500 to 600, sentence case */
+.hero-title, .rd-h2, .work-count, .work-name, .motto-xl, .footer-title, .page-title,
+.stats-list strong, .tool b, .logo, .footer-word,
+.loading-container .loading-words h2, .fixed-nav .nav-row .btn-text-inner { font-weight: 600; text-transform: none; }
+.logo { letter-spacing: 0; }
+.intro-title, .detail-lead, .card h3 { font-weight: 500; }
+.back-to-top-btn { text-transform: none; }
+.hero-quick h2, h5 { text-transform: none; letter-spacing: 0; }
+
+/* repo metadata in mono, the signature */
+.work-tech { display: flex; flex-wrap: wrap; gap: 0; }
+.work-tech em { font-family: var(--font-mono); font-size: .8rem; border: 0; border-radius: 0; padding: 0; color: var(--color-muted); }
+.work-tech em + em::before { content: '\00b7'; margin: 0 .6em; }
+.hero-quick a small { font-family: var(--font-mono); font-size: .75rem; }
+
+/* radius by size: controls 10, chips 8, no full pills */
+.btn-click, .nav-bar .links-wrap li:nth-child(3) .btn-click { border-radius: var(--r-control); }
+.chip, .hero-chips li, .tag-chips li, .back-to-top-btn { border-radius: 8px; }
+
+/* loader emblem: flat mark drawn in CSS (img/scpback.webp is not in the project) */
+.loading-container .loading-intro-emblem { -webkit-mask: none; mask: none; border-radius: 50%; width: min(24vw, 24vh, 160px); height: min(24vw, 24vh, 160px); background: var(--color-red); position: relative; }
+.loading-container .loading-intro-emblem::after { content: ''; position: absolute; inset: 28%; border-radius: 50%; background: var(--color-dark-dark); }
+
+/* project proof blocks: session, numbers, decisions, limits. Blanks are .ph until filled. */
+.proof-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: clamp(2rem, 6vw, 6rem); align-items: start; }
+.term { margin: 0 0 1.5rem; padding: 1.25rem 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); font-family: var(--font-mono); font-size: .9rem; line-height: 1.7; color: #fff; white-space: pre-wrap; overflow-x: auto; }
+.term .prompt { color: var(--color-red); }
+.ph { font-family: var(--font-mono); font-size: .9em; color: #cfc8c7; border-bottom: 1px dashed var(--color-red); }
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(2rem, 6vw, 6rem); margin: 0; }
+.metrics div { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--color-border); }
+.metrics dt { color: var(--color-muted); }
+.metrics dd { margin: 0; text-align: right; }
+.limits { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 6vw, 6rem); }
+.limits ul { list-style: none; padding: 0; margin: 0; }
+.limits li { padding: 1rem 0; border-top: 1px solid var(--color-border); color: var(--color-muted); }
+@media (max-width: 900px) { .proof-grid, .metrics, .limits { grid-template-columns: 1fr; } }

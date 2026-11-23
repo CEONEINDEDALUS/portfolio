@@ -1304,7 +1304,7 @@ async function handleContactSubmit(event) {
     }
 
     if (!response.ok || !result.ok) {
-      throw new Error(result.error || 'Could not send the message. Please email hello@ceonein.dev directly.');
+      throw new Error(result.error || 'Could not send the message. Please email ceonein@protonmail.com directly.');
     }
 
     form.reset();
@@ -1312,9 +1312,9 @@ async function handleContactSubmit(event) {
     setStatus("Message sent. I'll get back to you soon.", 'success');
   } catch (error) {
     if (error.name === 'AbortError') {
-      setStatus('The request timed out. Please try again or email hello@ceonein.dev.', 'error');
+      setStatus('The request timed out. Please try again or email ceonein@protonmail.com.', 'error');
     } else {
-      setStatus(error.message || 'Could not send the message. Please email hello@ceonein.dev directly.', 'error');
+      setStatus(error.message || 'Could not send the message. Please email ceonein@protonmail.com directly.', 'error');
     }
   } finally {
     delete form.dataset.sending;

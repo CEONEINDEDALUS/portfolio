@@ -1,6 +1,13 @@
+# This file is for local `wrangler dev` only. The deployed Worker needs
+# RESEND_API_KEY and CONTACT_TO set in Cloudflare (Settings > Variables and
+# Secrets, or `wrangler secret put`).
 RESEND_API_KEY=re_your_resend_api_key
+
+# Required. While using onboarding@resend.dev this MUST be the Resend account
+# owner's email address; Resend rejects every other recipient.
 CONTACT_TO=you@example.com
-# Use your verified domain sender in production, for example:
-# CONTACT_FROM=Ceonein Portfolio <contact@ceonein.dev>
-# Until the domain is verified, Resend's test sender works for the account owner:
+
+# Optional. Defaults to Resend's test sender, which only delivers to CONTACT_TO.
+# After verifying your domain, switch to a sender on that domain, for example:
+# CONTACT_FROM=Ceonein Portfolio <contact@ceonein.com>
 CONTACT_FROM=Ceonein Portfolio <onboarding@resend.dev>

@@ -102,8 +102,15 @@ export async function onRequestPost({ request, env }) {
     return json({ ok: false, error: 'Request origin not allowed.' }, 403);
   }
 
-  if (!env.RESEND_API_KEY) {
-    return json({ ok: false, error: 'Email service is not configured yet. Please email hello@ceonein.dev directly.' }, 500);
+  const recipient = (env.CONTACT_TO || '')
+    .split(',')
+    .map((value) => value.trim())
+    .filter(Boolean);
+  const sender = env.CONTACT_FROM || 'Ceonein Portfolio <onboarding@resend.dev>';
+
+  if (!env.RESEND_API_KEY || recipient.length === 0) {
+    console.error('Contact form is missing RESEND_API_KEY or CONTACT_TO configuration');
+    return json({ ok: false, error: 'Email service is not configured yet. Please email ceonein@protonmail.com directly.' }, 500);
   }
 
   const contentType = request.headers.get('Content-Type') || '';
@@ -161,15 +168,9 @@ export async function onRequestPost({ request, env }) {
   const ip = request.headers.get('CF-Connecting-IP') || request.headers.get('X-Forwarded-For') || 'unknown';
   pruneRateHits();
   if (isRateLimited(ip)) {
-    return json({ ok: false, error: 'Too many messages. Please try again later or email hello@ceonein.dev.' }, 429);
+    return json({ ok: false, error: 'Too many messages. Please try again later or email ceonein@protonmail.com.' }, 429);
   }
 
-  const recipient = (env.CONTACT_TO || 'hello@ceonein.dev')
-    .split(',')
-    .map((value) => value.trim())
-    .filter(Boolean);
-
-  const sender = env.CONTACT_FROM || 'Ceonein Portfolio <contact@ceonein.dev>';
   const subject = `Project inquiry: ${topic}`;
   const intro = `Hello, I am ${name}${company ? ` from ${company}` : ''} and I want to talk about ${topic}.`;
   const budgetLabel = budget || 'Not specified';
@@ -220,13 +221,13 @@ export async function onRequestPost({ request, env }) {
     });
   } catch (error) {
     console.error('Resend request failed', error);
-    return json({ ok: false, error: 'Could not reach the email service. Please email hello@ceonein.dev directly.' }, 502);
+    return json({ ok: false, error: 'Could not reach the email service. Please email ceonein@protonmail.com directly.' }, 502);
   }
 
   if (!resendResponse.ok) {
     const errorText = await resendResponse.text();
     console.error('Resend rejected message', resendResponse.status, errorText.slice(0, 500));
-    return json({ ok: false, error: 'Could not send the message. Please email hello@ceonein.dev directly.' }, 502);
+    return json({ ok: false, error: 'Could not send the message. Please email ceonein@protonmail.com directly.' }, 502);
   }
 
   return json({ ok: true });
